@@ -1,30 +1,10 @@
 const { ApolloServer } = require('@apollo/server');
-const { ApolloServerPluginLandingPageGraphQLPlayground } = require('@apollo/server-plugin-landing-page-graphql-playground')
-const { expressMiddleware } = require('@apollo/server/express4')
+const { loadFilesSync } = require('@graphql-tools/load-files');
+const resolvers = require('./resolvers');
 
-const typeDefs = `
-  type Query {
-    hello: String    
-  }
-`;
+const server = new ApolloServer({
+  typeDefs: loadFilesSync('./src/**/*.graphql'),
+  resolvers
+});
 
-const resolvers = {
-  Query: {
-    hello: () => 'hola mundo'
-  }
-}
-
-const useGraphql = async () => {
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    playground: true,
-    plugins: [ ApolloServerPluginLandingPageGraphQLPlayground ]
-  });
-
-  await server.start();
-
-  return server;
-};
-
-module.exports =  { useGraphql };
+module.exports = { server };

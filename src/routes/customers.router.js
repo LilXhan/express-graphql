@@ -5,13 +5,13 @@ const validationHandler = require('../middlewares/validator.handler');
 const {
   createCustomerDto,
   getCustomerDto,
-  updateCustomerDto,
+  updateCustomerDto
 } = require('../dtos/customer.dto');
 
 const router = express.Router();
 const service = new CustomerService();
 
-router.get('/',  async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.json(await service.find());
   } catch (error) {

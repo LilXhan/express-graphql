@@ -18,16 +18,18 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "8.21.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-prettier": "4.2.1",
-    "nodemon": "2.0.19",
-    "prettier": "2.7.1"
+    "eslint": "^8.42.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "2.0.19"
   },
   "dependencies": {
     "@apollo/server": "^4.7.1",
     "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.1",
     "@faker-js/faker": "7.4.0",
+    "@graphql-tools/load-files": "^7.0.0",
     "@hapi/boom": "10.0.0",
     "bcrypt": "5.0.1",
     "cors": "2.8.5",
