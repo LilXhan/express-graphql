@@ -1,10 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const { USER_TABLE } = require('./user.model')
+const { USER_TABLE } = require('./user.model');
 
 const CUSTOMER_TABLE = 'customers';
 
-const CustomerSchema =  {
+const CustomerSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -13,22 +13,22 @@ const CustomerSchema =  {
   },
   name: {
     allowNull: false,
-    type: DataTypes.STRING,
+    type: DataTypes.STRING
   },
   lastName: {
     allowNull: false,
     type: DataTypes.STRING,
-    field: 'last_name',
+    field: 'last_name'
   },
   phone: {
     allowNull: true,
-    type: DataTypes.STRING,
+    type: DataTypes.STRING
   },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    defaultValue: Sequelize.NOW,
+    defaultValue: Sequelize.NOW
   },
   userId: {
     field: 'user_id',
@@ -42,25 +42,24 @@ const CustomerSchema =  {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   }
-}
+};
 
 class Customer extends Model {
-
-  static associate(models) {
-    this.belongsTo(models.User, {as: 'user'});
+  static associate (models) {
+    this.belongsTo(models.User, { as: 'user' });
     this.hasMany(models.Order, {
       as: 'orders',
       foreignKey: 'customerId'
     });
   }
 
-  static config(sequelize) {
+  static config (sequelize) {
     return {
       sequelize,
       tableName: CUSTOMER_TABLE,
       modelName: 'Customer',
       timestamps: false
-    }
+    };
   }
 }
 

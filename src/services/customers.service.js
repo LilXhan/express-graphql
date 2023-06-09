@@ -3,17 +3,16 @@ const bcrypt = require('bcrypt');
 const { models } = require('../db/sequelize');
 
 class CustomerService {
+  constructor () {}
 
-  constructor() {}
-
-  async find() {
+  async find () {
     const rta = await models.Customer.findAll({
       include: ['user']
     });
     return rta;
   }
 
-  async findOne(id) {
+  async findOne (id) {
     const user = await models.Customer.findByPk(id);
     if (!user) {
       throw boom.notFound('customer not found');
@@ -21,7 +20,7 @@ class CustomerService {
     return user;
   }
 
-  async create(data) {
+  async create (data) {
     const hash = await bcrypt.hash(data.user.password, 10);
     const newData = {
       ...data,
@@ -29,7 +28,7 @@ class CustomerService {
         ...data.user,
         password: hash
       }
-    }
+    };
     const newCustomer = await models.Customer.create(newData, {
       include: ['user']
     });
@@ -37,18 +36,17 @@ class CustomerService {
     return newCustomer;
   }
 
-  async update(id, changes) {
+  async update (id, changes) {
     const model = await this.findOne(id);
     const rta = await model.update(changes);
     return rta;
   }
 
-  async delete(id) {
+  async delete (id) {
     const model = await this.findOne(id);
     await model.destroy();
     return { rta: true };
   }
-
 }
 
 module.exports = CustomerService;

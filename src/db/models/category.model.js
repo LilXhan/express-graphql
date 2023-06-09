@@ -12,37 +12,35 @@ const CategorySchema = {
   name: {
     type: DataTypes.STRING,
     unique: true,
-    allowNull: false,
+    allowNull: false
   },
   image: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    defaultValue: Sequelize.NOW,
-  },
-}
-
+    defaultValue: Sequelize.NOW
+  }
+};
 
 class Category extends Model {
-
-  static associate(models) {
+  static associate (models) {
     this.hasMany(models.Product, {
       as: 'products',
       foreignKey: 'categoryId'
     });
   }
 
-  static config(sequelize) {
+  static config (sequelize) {
     return {
       sequelize,
       tableName: CATEGORY_TABLE,
       modelName: 'Category',
       timestamps: false
-    }
+    };
   }
 }
 

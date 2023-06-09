@@ -9,7 +9,7 @@ module.exports = {
       {
         customer_id: 1,
         created_at: new Date()
-      },
+      }
     ]);
   },
   down: (queryInterface) => {

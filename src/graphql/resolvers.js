@@ -13,15 +13,20 @@
 //   }
 // }
 
-const { getProduct, getProducts, addProduct, updateProduct, deleteProduct } = require('./product.resolvers');
+const { getProduct, getProducts, addProduct, updateProduct, deleteProduct, getProductsByCategory } = require('./product.resolvers');
 const { login } = require('./auth.resolvers');
-const { addCategory } = require('./category.resolvers.js');
+const { addCategory, getCategory } = require('./category.resolvers.js');
+const { RegularExpression } = require('graphql-scalars');
+
+const CategoryNameType = new RegularExpression('CategoryNameType', /^[a-zA-Z0-9]{3,8}$/);
 
 const resolvers = {
   Query: {
     // Products
     product: getProduct,
-    products: getProducts
+    products: getProducts,
+    // Category
+    category: getCategory
   },
   Mutation: {
     // Product
@@ -32,6 +37,10 @@ const resolvers = {
     login,
     // Category
     addCategory
+  },
+  CategoryNameType,
+  Category: {
+    products: getProductsByCategory
   }
 };
 

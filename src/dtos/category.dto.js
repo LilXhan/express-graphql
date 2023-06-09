@@ -10,12 +10,12 @@ const createCategoryDto = Joi.object({
 });
 
 const updateCategoryDto = Joi.object({
-  name: name,
-  image: image
+  name,
+  image
 });
 
 const getCategoryDto = Joi.object({
-  id: id.required(),
+  id: id.required()
 });
 
-module.exports = { createCategoryDto, updateCategoryDto, getCategoryDto }
+module.exports = { createCategoryDto, updateCategoryDto, getCategoryDto };

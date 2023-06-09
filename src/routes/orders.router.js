@@ -5,7 +5,7 @@ const validatorHandler = require('../middlewares/validator.handler');
 const {
   getOrderDto,
   createOrderDto,
-  addItemDto,
+  addItemDto
 } = require('../dtos/order.dto');
 
 const router = express.Router();

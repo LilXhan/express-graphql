@@ -12,7 +12,7 @@ module.exports = {
         phone: '7830601',
         user_id: 2,
         created_at: new Date()
-      },
+      }
     ]);
   },
   down: (queryInterface) => {

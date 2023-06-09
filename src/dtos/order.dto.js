@@ -7,17 +7,17 @@ const productId = Joi.number().integer();
 const amount = Joi.number().integer().min(1);
 
 const getOrderDto = Joi.object({
-  id: id.required(),
+  id: id.required()
 });
 
 const createOrderDto = Joi.object({
-  customerId: customerId.required(),
+  customerId: customerId.required()
 });
 
 const addItemDto = Joi.object({
   orderId: orderId.required(),
   productId: productId.required(),
-  amount: amount.required(),
+  amount: amount.required()
 });
 
 module.exports = { getOrderDto, createOrderDto, addItemDto };

@@ -5,7 +5,7 @@ const { PRODUCT_TABLE } = require('./product.model');
 
 const ORDER_PRODUCT_TABLE = 'orders_products';
 
-const OrderProductSchema =  {
+const OrderProductSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -16,7 +16,7 @@ const OrderProductSchema =  {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    defaultValue: Sequelize.NOW,
+    defaultValue: Sequelize.NOW
   },
   amount: {
     allowNull: false,
@@ -44,21 +44,20 @@ const OrderProductSchema =  {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   }
-}
+};
 
 class OrderProduct extends Model {
-
-  static associate(models) {
+  static associate (models) {
     //
   }
 
-  static config(sequelize) {
+  static config (sequelize) {
     return {
       sequelize,
       tableName: ORDER_PRODUCT_TABLE,
       modelName: 'OrderProduct',
       timestamps: false
-    }
+    };
   }
 }
 

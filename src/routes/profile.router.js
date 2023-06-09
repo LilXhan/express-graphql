@@ -9,7 +9,7 @@ const orderService = new OrderService();
 const userService = new UserService();
 
 router.get('/my-orders',
-  passport.authenticate('jwt', {session: false}),
+  passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const user = req.user;
@@ -22,7 +22,7 @@ router.get('/my-orders',
 );
 
 router.get('/my-user',
-  passport.authenticate('jwt', {session: false}),
+  passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
     try {
       const userPayload = req.user;

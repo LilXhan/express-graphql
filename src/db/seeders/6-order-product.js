@@ -17,7 +17,7 @@ module.exports = {
         order_id: 1,
         product_id: 2,
         created_at: new Date()
-      },
+      }
     ]);
   },
   down: (queryInterface) => {
