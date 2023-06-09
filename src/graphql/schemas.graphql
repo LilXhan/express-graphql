@@ -19,7 +19,6 @@ type Query {
   # Product
   product(id: ID!): Product
   products: [Product!]!
-  createProduct: Product
 }
 
 type Product {
@@ -29,4 +28,27 @@ type Product {
   description: String!,
   image: String!,
   created_at: String!
+}
+
+type Mutation {
+  addProduct(dto: CreateProductInput!): Product!
+  updateProduct(dto: UpdateProductInput!, idProduct: ID): Product
+  deleteProduct(idProduct: ID!): ID
+}
+
+# dtos -> lo que vamos a enviar a nuestro servicio data transfer objects
+input CreateProductInput {
+  name: String!
+  price: Int!
+  description: String!
+  image: String!
+  categoryId: ID!
+}
+
+input UpdateProductInput {
+  name: String
+  price: Int
+  description: String
+  image: String 
+  categoryId: ID
 }

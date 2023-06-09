@@ -13,14 +13,19 @@
 //   }
 // }
 
-const { getProduct, getProducts, createProduct } = require('./product.resolvers');
+const { getProduct, getProducts, addProduct, updateProduct, deleteProduct } = require('./product.resolvers');
 
 const resolvers = {
   Query: {
     // Products
     product: getProduct,
-    products: getProducts,
-    createProduct
+    products: getProducts
+  },
+  Mutation: {
+    // Product
+    addProduct,
+    updateProduct,
+    deleteProduct
   }
 };
 

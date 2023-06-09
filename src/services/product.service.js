@@ -4,8 +4,7 @@ const boom = require('@hapi/boom');
 const { models } = require('../db/sequelize');
 
 class ProductsService {
-
-  async create(data) {
+  async create (data) {
     const category = await models.Category.findByPk(data.categoryId);
     if (!category) {
       throw boom.notFound('category not found');
@@ -14,15 +13,15 @@ class ProductsService {
     return newProduct;
   }
 
-  async find(query) {
+  async find (query) {
     const options = {
       include: ['category'],
       where: {}
-    }
+    };
     const { limit, offset } = query;
     if (limit && offset) {
-      options.limit =  limit;
-      options.offset =  offset;
+      options.limit = limit;
+      options.offset = offset;
     }
 
     const { price } = query;
@@ -30,18 +29,18 @@ class ProductsService {
       options.where.price = price;
     }
 
-    const { price_min, price_max } = query;
-    if (price_min && price_max) {
+    const { priceMin, priceMax } = query;
+    if (priceMin && priceMax) {
       options.where.price = {
-        [Op.gte]: price_min,
-        [Op.lte]: price_max,
+        [Op.gte]: priceMin,
+        [Op.lte]: priceMax
       };
     }
     const products = await models.Product.findAll(options);
     return products;
   }
 
-  async findOne(id) {
+  async findOne (id) {
     const product = await models.Product.findByPk(id, {
       include: ['category']
     });
@@ -51,18 +50,17 @@ class ProductsService {
     return product;
   }
 
-  async update(id, changes) {
+  async update (id, changes) {
     const product = await this.findOne(id);
     const rta = await product.update(changes);
     return rta;
   }
 
-  async delete(id) {
+  async delete (id) {
     const product = await this.findOne(id);
     await product.destroy();
     return { id };
-  }
-
+  };
 }
 
 module.exports = ProductsService;
