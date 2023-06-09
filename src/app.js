@@ -4,6 +4,7 @@ const routerApi = require('./routes');
 const { checkApiKey } = require('./middlewares/auth.handler');
 const { server } = require('./graphql');
 const { expressMiddleware } = require('@apollo/server/express4');
+const { buildContext } = require('graphql-passport');
 
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
 
@@ -26,7 +27,9 @@ const createApp = async () => {
   });
 
   routerApi(app);
-  app.use('/graphql', expressMiddleware(server));
+  app.use('/graphql', expressMiddleware(server, {
+    context: ({ req, res }) => buildContext({ req, res })
+  }));
 
   app.use(logErrors);
   app.use(ormErrorHandler);

@@ -21,6 +21,29 @@ type Query {
   products: [Product!]!
 }
 
+type Mutation {
+  login(email: String!, password: String!): AuthResponse
+  addProduct(dto: CreateProductInput!): Product!
+  updateProduct(dto: UpdateProductInput!, idProduct: ID): Product
+  deleteProduct(idProduct: ID!): ID
+  addCategory(dto: CreateCategoryInput!): Category!
+}
+
+# types
+
+type AuthResponse {
+  access_token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  recoveryToken: String
+  role: String!
+  createdAt: String!
+}
+
 type Product {
   id: ID!,
   name: String!,
@@ -28,13 +51,16 @@ type Product {
   description: String!,
   image: String!,
   created_at: String!
+  categoryId: ID!
+  category: Category!
 }
 
-type Mutation {
-  addProduct(dto: CreateProductInput!): Product!
-  updateProduct(dto: UpdateProductInput!, idProduct: ID): Product
-  deleteProduct(idProduct: ID!): ID
+type Category {
+  id: ID!
+  name: String!
+  image: String!
 }
+
 
 # dtos -> lo que vamos a enviar a nuestro servicio data transfer objects
 input CreateProductInput {
@@ -43,6 +69,11 @@ input CreateProductInput {
   description: String!
   image: String!
   categoryId: ID!
+}
+
+input CreateCategoryInput {
+  name: String!
+  image: String!
 }
 
 input UpdateProductInput {
